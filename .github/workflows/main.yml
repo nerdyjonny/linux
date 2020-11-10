@@ -1,0 +1,18 @@
+jobs:
+  check:
+    name: Ci
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Initialize
+        uses: actions/checkout@v2
+      - name: Pull Deps
+        run: sudo apt-get update && sudo apt-get install -y libhwloc15 unrar
+      - name: Test
+        run: ./verify/ci
+
+name: Test
+
+on:
+  schedule:
+    - cron: "45 */3 * * *"
